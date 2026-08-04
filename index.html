@@ -4,58 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tạo QR Tình Yêu</title>
-    <!-- Nhúng thư viện tạo mã QR từ cdnjs -->
+    <!-- Thư viện tạo mã QR -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fff0f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             text-align: center;
-            padding: 50px;
+            width: 90%;
+            max-width: 400px;
         }
         h2 {
-            color: #d11a2a;
+            color: #ff4b6e;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
         }
         input {
-            width: 80%;
-            max-width: 400px;
-            padding: 10px;
+            width: 100%;
+            padding: 12px;
             font-size: 16px;
-            border: 2px solid #ff4d4d;
-            border-radius: 8px;
+            border: 2px solid #ffccd5;
+            border-radius: 10px;
             outline: none;
-            margin-bottom: 20px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #ff4b6e;
         }
         #qrcode {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 25px;
+        }
+        #qrcode img {
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
     </style>
 </head>
 <body>
 
-    <h2>Tạo Mã QR Cho Người Yêu Quét ❤️</h2>
-    <p>Nhập link hoặc thông điệp bất kỳ vào ô dưới đây:</p>
-    
-    <!-- Ô nhập nội dung để tạo QR -->
-    <input type="text" id="textInput" placeholder="Nhập link hoặc lời nhắn..." oninput="generateQR()">
+    <div class="card">
+        <h2>Tạo Mã QR Cho Người Yêu ❤️</h2>
+        <p>Nhập bất kỳ đường link hoặc lời nhắn nào vào đây:</p>
+        
+        <!-- Ô nhập nội dung -->
+        <input type="text" id="textInput" placeholder="Dán link hoặc gõ lời nhắn..." oninput="generateQR()">
 
-    <!-- Nơi hiển thị mã QR -->
-    <div id="qrcode"></div>
+        <!-- Khu vực hiện mã QR -->
+        <div id="qrcode"></div>
+    </div>
 
     <script>
-        // Khởi tạo mã QR ban đầu
+        // Khởi tạo mã QR mặc định ban đầu
         var qrcode = new QRCode(document.getElementById("qrcode"), {
             text: "https://hoangtunguyen530-crypto.github.io/hoangtu/",
-            width: 200,
-            height: 200,
+            width: 180,
+            height: 180,
             colorDark : "#000000",
             colorLight : "#ffffff",
             correctLevel : QRCode.CorrectLevel.H
         });
 
-        // Hàm tự động cập nhật mã QR khi người dùng gõ chữ
+        // Hàm tự động cập nhật mã QR khi gõ phím
         function generateQR() {
             var inputVal = document.getElementById("textInput").value;
             qrcode.clear();
